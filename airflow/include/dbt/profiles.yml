@@ -1,0 +1,13 @@
+estudo_dbt:
+  outputs:
+    dev:
+      account: 'PRIRZUB-DGC78146'
+      database: ESTUDO_DB
+      password: BG4WbHBZiyskMTK
+      role: SYSADMIN
+      schema: ANALYTICS
+      threads: 4
+      type: snowflake
+      user: fabioppedrosa
+      warehouse: ESTUDO_WH
+  target: dev

@@ -1,0 +1,11 @@
+version: '3'
+services:
+  scheduler:
+    volumes:
+      - ~/dbt_estudo/airflow/include:/usr/local/airflow/include
+  webserver:
+    volumes:
+      - ~/dbt_estudo/airflow/include:/usr/local/airflow/include
+  triggerer:
+    volumes:
+      - ~/dbt_estudo/airflow/include:/usr/local/airflow/include

@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: dim_clientes
+    description: "Dimensão de clientes ativos com agregações de pedidos. Granularidade: um registro por cliente."
+    columns:
+      - name: cliente_id
+        description: "Chave primária do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Email do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: total_pedidos
+        description: "Total de pedidos realizados pelo cliente"
+        tests:
+          - not_null
+      - name: valor_total
+        description: "Soma de todos os valores de pedidos do cliente"
+      - name: valor_medio
+        description: "Valor médio por pedido do cliente"
+      - name: data_primeiro_pedido
+        description: "Data do primeiro pedido do cliente"
+      - name: data_ultimo_pedido
+        description: "Data do pedido mais recente do cliente"
+
+  - name: fct_pedidos
+    description: "Fatos de pedidos agregados por cliente com pivot de valores por status."
+    columns:
+      - name: cliente_id
+        description: "FK para dim_clientes"
+        tests:
+          - not_null
+      - name: nome_cliente
+        description: "Nome do cliente"
+        tests:
+          - not_null
+      - name: valor_concluido
+        description: "Soma dos pedidos com status Concluído"
+        tests:
+          - not_null
+      - name: valor_pendente
+        description: "Soma dos pedidos com status Pendente"
+        tests:
+          - not_null
+      - name: valor_cancelado
+        description: "Soma dos pedidos com status Cancelado"
+        tests:
+          - not_null
+
+  - name: dim_clientes_historico
+    description: "Histórico completo de mudanças dos clientes via SCD Type 2."
+    columns:
+      - name: cliente_id
+        description: "ID do cliente"
+      - name: cidade
+        description: "Cidade do cliente no período de validade"
+      - name: valido_desde
+        description: "Data de início da validade do registro"
+      - name: valido_ate
+        description: "Data de fim da validade. 9999-12-31 indica registro atual"
+      - name: is_current
+        description: "TRUE se for o registro mais recente do cliente"

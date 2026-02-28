@@ -1,0 +1,7 @@
+astronomer-cosmos==1.8.0
+dbt-snowflake==1.9.0
+agate>=1.7.0,<1.10
+isodate>=0.6,<0.7
+importlib-metadata>=6.0,<7
+protobuf>=5.0.0,<6.0.0
+apache-airflow-providers-snowflake==5.8.0

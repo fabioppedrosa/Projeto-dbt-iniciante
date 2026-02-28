@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_clientes
+    description: "Clientes padronizados da camada raw. Um registro por cliente."
+    columns:
+      - name: cliente_id
+        description: "Chave primária do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: nome
+        description: "Nome do cliente em maiúsculas"
+      - name: email
+        description: "Email do cliente em minúsculas"
+        tests:
+          - unique
+          - not_null
+      - name: cidade
+        description: "Cidade do cliente"
+      - name: ativo
+        description: "Indica se o cliente está ativo"
+        tests:
+          - not_null
+      - name: data_cadastro
+        description: "Data de cadastro do cliente"
+
+  - name: stg_pedidos
+    description: "Pedidos padronizados da camada raw. Um registro por pedido."
+    columns:
+      - name: pedido_id
+        description: "Chave primária do pedido"
+        tests:
+          - unique
+          - not_null
+      - name: cliente_id
+        description: "FK para stg_clientes"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_clientes')
+              field: cliente_id
+      - name: valor
+        description: "Valor do pedido em reais"
+        tests:
+          - not_null
+      - name: status
+        description: "Status do pedido padronizado: Concluído, Pendente, Cancelado"
+        tests:
+          - accepted_values:
+              values: ['Concluído', 'Pendente', 'Cancelado', 'Desconhecido']
+      - name: data_pedido
+        description: "Data em que o pedido foi realizado"

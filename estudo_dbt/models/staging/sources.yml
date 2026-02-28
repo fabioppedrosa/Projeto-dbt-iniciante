@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Camada raw com dados brutos vindos dos sistemas de origem"
+    database: ESTUDO_DB
+    schema: RAW
+    tables:
+      - name: clientes
+        description: "Tabela bruta de clientes do sistema transacional"
+        columns:
+          - name: cliente_id
+            description: "PK do cliente"
+          - name: nome
+            description: "Nome completo do cliente"
+          - name: email
+            description: "Email do cliente"
+          - name: cidade
+            description: "Cidade do cliente"
+          - name: ativo
+            description: "Flag de cliente ativo"
+          - name: data_cadastro
+            description: "Data de cadastro no sistema"
+
+      - name: pedidos
+        description: "Tabela bruta de pedidos do sistema transacional"
+        columns:
+          - name: pedido_id
+            description: "PK do pedido"
+          - name: cliente_id
+            description: "FK para clientes"
+          - name: valor
+            description: "Valor do pedido"
+          - name: status
+            description: "Status do pedido"
+          - name: data_pedido
+            description: "Data do pedido"
